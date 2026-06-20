@@ -112,22 +112,71 @@
 <h1>النموذج الاسترشادي الأول 2026 - اللغة العربية وتفسير الإجابات</h1>
 
 <div class="btns">
+  <button onclick="location.href='index.html'">الرجوع للصفحة الرئيسية</button>
   <button onclick="checkAnswers()">تصحيح الامتحان وحساب النتيجة</button>
   <button onclick="showAllAnswers()">عرض كل الإجابات والتفسيرات</button>
   <button onclick="window.print()">طباعة PDF</button>
+  <button onclick="clearProgress()" style="background-color: #fee2e2; color: #dc2626; border-color: #fca5a5;">مسح الإجابات والبدء من جديد</button>
 </div>
 <div id="scoreBox"></div>
 
 <div id="examArea"></div>
 
 <div class="btns">
+  <button onclick="location.href='index.html'">الرجوع للصفحة الرئيسية</button>
   <button onclick="checkAnswers()">تصحيح الامتحان وحساب النتيجة</button>
   <button onclick="showAllAnswers()">عرض كل الإجابات والتفسيرات</button>
   <button onclick="window.print()">طباعة PDF</button>
+  <button onclick="clearProgress()" style="background-color: #fee2e2; color: #dc2626; border-color: #fca5a5;">مسح الإجابات والبدء من جديد</button>
 </div>
 </div>
 
 <script>
+// Progress saving & loading utility
+const pageName = window.location.pathname.split("/").pop() || "index.html";
+const examKey = "exam_progress_" + pageName;
+
+function getSavedAnswers() {
+  try {
+    return JSON.parse(localStorage.getItem(examKey)) || {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveAnswer(qNum, value) {
+  const answers = getSavedAnswers();
+  answers[qNum] = value;
+  localStorage.setItem(examKey, JSON.stringify(answers));
+}
+
+function clearProgress() {
+  if (confirm("هل أنت متأكد من رغبتك في مسح جميع إجاباتك والبدء من جديد؟")) {
+    localStorage.removeItem(examKey);
+    window.location.reload();
+  }
+}
+
+function restoreProgress() {
+  const answers = getSavedAnswers();
+  for (const qNum in answers) {
+    const qdiv = document.getElementById("q" + qNum);
+    if (!qdiv) continue;
+    const ul = qdiv.querySelector(".options");
+    if (ul) {
+      const selectedIndex = answers[qNum];
+      const lis = ul.querySelectorAll("li");
+      if (lis[selectedIndex]) {
+        lis[selectedIndex].classList.add("selected");
+      }
+    }
+    const ta = qdiv.querySelector(".essay-box");
+    if (ta) {
+      ta.value = answers[qNum];
+    }
+  }
+}
+
 const passages = {
 p1: `(السرقات العلمية)
 
@@ -524,6 +573,7 @@ data.forEach((q, idx) => {
         if (qdiv.classList.contains("checked")) return;
         ul.querySelectorAll("li").forEach(l => l.classList.remove("selected"));
         li.classList.add("selected");
+        saveAnswer(q.n, i);
       };
       ul.appendChild(li);
     });
@@ -537,6 +587,9 @@ data.forEach((q, idx) => {
     const ta = document.createElement("textarea");
     ta.className = "essay-box";
     ta.placeholder = "اكتب إجابتك هنا...";
+    ta.oninput = (e) => {
+      saveAnswer(q.n, e.target.value);
+    };
     qdiv.appendChild(ta);
 
     const ans = document.createElement("div");
@@ -597,6 +650,8 @@ function showAllAnswers() {
     }
   });
 }
+
+restoreProgress();
 </script>
 </body>
 </html>

@@ -954,8 +954,8 @@
     <div class="hero-glow-1"></div>
     <div class="hero-glow-2"></div>
     <div class="container hero-content">
-      <span class="hero-badge">الصف الثالث الثانوي 2025/2026</span>
-      <h1 class="hero-title">منصة نماذج امتحانات <span>اللغة العربية</span></h1>
+      <!-- <span class="hero-badge">الصف الثالث الثانوي 2025/2026</span> -->
+      <h1 class="hero-title">منصة نماذج امتحانات <span>الثانوية العامة</span></h1>
       <p class="hero-subtitle">بوابتك التفاعلية للتميز والاستعداد التام للامتحانات الوزارية والاسترشادية. اختبر معلوماتك، راجع تفسيرات الإجابات، وحمل جميع الملحقات بنقرة زر.</p>
     </div>
   </section>
@@ -1766,7 +1766,10 @@
       
       // Update statistics bars & texts
       document.getElementById('trackerProgressPercent').textContent = `${percent}%`;
-      document.getElementById('userProgressPercent').textContent = `${percent}%`;
+      const userProgressPercent = document.getElementById('userProgressPercent');
+      if (userProgressPercent) {
+        userProgressPercent.textContent = `${percent}%`;
+      }
       document.getElementById('trackerProgressFill').style.width = `${percent}%`;
 
       // Update motivational messages

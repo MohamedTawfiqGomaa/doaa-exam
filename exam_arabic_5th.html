@@ -140,6 +140,43 @@
 </div>
 
 <script>
+// Progress saving & loading utility
+const pageName = window.location.pathname.split("/").pop() || "index.html";
+const examKey = "exam_progress_" + pageName;
+
+function getSavedAnswers() {
+  try {
+    return JSON.parse(localStorage.getItem(examKey)) || {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveAnswer(qNum, value) {
+  const answers = getSavedAnswers();
+  answers[qNum] = value;
+  localStorage.setItem(examKey, JSON.stringify(answers));
+}
+
+function restoreProgress() {
+  const answers = getSavedAnswers();
+  for (const qNum in answers) {
+    const qdiv = document.getElementById("q" + qNum);
+    if (!qdiv) continue;
+    const ul = qdiv.querySelector(".options");
+    if (ul) {
+      const selectedIndex = answers[qNum];
+      const lis = ul.querySelectorAll("li");
+      if (lis[selectedIndex]) {
+        lis[selectedIndex].classList.add("selected");
+      }
+    }
+    const ta = qdiv.querySelector(".essay-box");
+    if (ta) {
+      ta.value = answers[qNum];
+    }
+  }
+}
 const passages = {
 p1: {
   title: "الزهراوي رائد الجراحة في العصر الإسلامي",
@@ -772,6 +809,7 @@ data.forEach((q, idx) => {
         if (qdiv.classList.contains("checked")) return;
         ul.querySelectorAll("li").forEach(l => l.classList.remove("selected"));
         li.classList.add("selected");
+        saveAnswer(q.n, i);
       };
       ul.appendChild(li);
     });
@@ -785,6 +823,9 @@ data.forEach((q, idx) => {
     const ta = document.createElement("textarea");
     ta.className = "essay-box";
     ta.placeholder = "اكتب إجابتك هنا...";
+    ta.oninput = (e) => {
+      saveAnswer(q.n, e.target.value);
+    };
     qdiv.appendChild(ta);
 
     const ans = document.createElement("div");
@@ -861,6 +902,7 @@ function showAllAnswers() {
 
 function resetExam() {
   if (!confirm('هل تريد إعادة الاختبار؟ سيتم حذف جميع إجاباتك.')) return;
+  localStorage.removeItem(examKey);
   data.forEach(q => {
     const qdiv = document.getElementById("q" + q.n);
     qdiv.classList.remove("checked");
@@ -878,6 +920,8 @@ function resetExam() {
   box.textContent = "";
   window.scrollTo({top: 0, behavior: "smooth"});
 }
+
+restoreProgress();
 </script>
 </body>
 </html>

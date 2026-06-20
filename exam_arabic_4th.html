@@ -963,6 +963,55 @@
 </div><!-- /container -->
 
 <script>
+// Progress saving & loading utility
+const pageName = window.location.pathname.split("/").pop() || "index.html";
+const examKey = "exam_progress_" + pageName;
+
+function getSavedAnswers() {
+  try {
+    return JSON.parse(localStorage.getItem(examKey)) || {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveAnswer(qNum, value) {
+  const answers = getSavedAnswers();
+  answers[qNum] = value;
+  localStorage.setItem(examKey, JSON.stringify(answers));
+}
+
+function restoreProgress() {
+  const answers = getSavedAnswers();
+  for (const qid in answers) {
+    const qdiv = document.getElementById(qid);
+    if (!qdiv) continue;
+    const ul = qdiv.querySelector(".options");
+    if (ul) {
+      const opt = answers[qid];
+      selectedAnswers[qid] = opt;
+      const lis = ul.querySelectorAll("li");
+      lis.forEach(li => {
+        const m = li.getAttribute('onclick').match(/'([أبجد])'\)/);
+        if (!m) return;
+        const liOpt = m[1];
+        if (liOpt === answerKey[qid]) {
+          li.classList.add('correct');
+        } else if (liOpt === opt && opt !== answerKey[qid]) {
+          li.classList.add('wrong');
+        }
+      });
+      const exp = document.getElementById('exp_' + qid);
+      if (exp) exp.style.display = 'block';
+    } else {
+      const ta = qdiv.querySelector(".essay-box");
+      if (ta) {
+        ta.value = answers[qid];
+      }
+    }
+  }
+}
+
 // answers key: question id -> correct option
 const answerKey = {
   q1:'ج', q2:'ب', q3:'د', q4:'أ', q5:'أ', q6:'ج',
@@ -981,6 +1030,7 @@ const selectedAnswers = {};
 function choose(el, qid, opt) {
   if (selectedAnswers[qid] !== undefined) return; // already answered
   selectedAnswers[qid] = opt;
+  saveAnswer(qid, opt);
 
   const options = el.parentElement.querySelectorAll('li');
   options.forEach(li => {
@@ -1069,6 +1119,7 @@ function showAllAnswers() {
 
 function resetExam() {
   if (!confirm('هل تريد إعادة الاختبار؟ سيتم حذف جميع إجاباتك.')) return;
+  localStorage.removeItem(examKey);
   Object.keys(selectedAnswers).forEach(k => delete selectedAnswers[k]);
   document.querySelectorAll('.options li').forEach(li => {
     li.classList.remove('correct','wrong','selected');
@@ -1079,6 +1130,18 @@ function resetExam() {
   document.getElementById('scoreBox').style.display = 'none';
   window.scrollTo({top:0, behavior:'smooth'});
 }
+
+// Bind essay inputs to save progress
+document.querySelectorAll('.question').forEach(qdiv => {
+  const ta = qdiv.querySelector('.essay-box');
+  if (ta) {
+    ta.oninput = (e) => {
+      saveAnswer(qdiv.id, e.target.value);
+    };
+  }
+});
+
+restoreProgress();
 </script>
 </body>
 </html>
