@@ -1176,7 +1176,7 @@
 
     .notes-textarea {
       width: 100%;
-      height: 120px;
+      height: 500px;
       background: var(--bg-tertiary);
       border: 1px solid var(--border-color);
       color: var(--text-primary);
@@ -1542,10 +1542,10 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
           أرشيف النماذج (PDF)
         </button> -->
-        <!-- <button class="tab-btn" onclick="switchTab('tracker')">
+        <button class="tab-btn" onclick="switchTab('tracker')">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          متابع الإنجاز والتقدم
-        </button> -->
+         المفكرة
+        </button>
       </div>
 
       <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; width: 100%; max-width: 580px; justify-content: flex-end;" class="search-filter-wrapper">
@@ -2043,7 +2043,7 @@
     <!-- Tab 3: Tracker & Study Board -->
     <div id="trackerTab" class="tab-content">
       <div class="tracker-card">
-        <div class="tracker-header-row">
+        <!-- <div class="tracker-header-row">
           <div class="tracker-title-group">
             <h2 style="font-size: 22px; font-weight: 800; color: var(--text-primary);">متابع تقدمك الشخصي</h2>
             <p style="font-size: 14px; color: var(--text-secondary);">تابع النماذج التي قمت بحلها لتحديد مدى جاهزيتك للامتحان.</p>
@@ -2054,17 +2054,17 @@
               <div class="progress-bar-fill" id="trackerProgressFill"></div>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="motivation-banner" id="motivationText">
+        <!-- <div class="motivation-banner" id="motivationText">
           ابدأ بحل النموذج الاسترشادي الثاني وسجل تقدمك هنا!
-        </div>
+        </div> -->
 
-        <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 16px;">قائمة النماذج الدراسية:</h3>
-        <div class="checklist-grid">
+        <!-- <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 16px;">قائمة النماذج الدراسية:</h3>
+        <div class="checklist-grid"> -->
           
-          <!-- Interactive 2 -->
-          <div class="check-item" onclick="toggleTask('task_int_2')">
+          <!-- Interactive 2 
+                 <div class="check-item" onclick="toggleTask('task_int_2')">
             <div class="checkbox-custom" id="check_task_int_2">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
@@ -2074,7 +2074,7 @@
             </div>
           </div>
 
-          <!-- Interactive 3 -->
+          <!- - Interactive 3 ->
           <div class="check-item" onclick="toggleTask('task_int_3')">
             <div class="checkbox-custom" id="check_task_int_3">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2085,7 +2085,7 @@
             </div>
           </div>
 
-          <!-- Interactive 4 -->
+          <!-- Interactive 4 
           <div class="check-item" onclick="toggleTask('task_int_4')">
             <div class="checkbox-custom" id="check_task_int_4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2096,7 +2096,7 @@
             </div>
           </div>
 
-          <!-- Interactive 5 -->
+          <!-- Interactive 5 ->
           <div class="check-item" onclick="toggleTask('task_int_5')">
             <div class="checkbox-custom" id="check_task_int_5">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2107,7 +2107,7 @@
             </div>
           </div>
 
-          <!-- PDF 2 -->
+          <!-- PDF 2 
           <div class="check-item" onclick="toggleTask('task_pdf_2')">
             <div class="checkbox-custom" id="check_task_pdf_2">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2118,7 +2118,7 @@
             </div>
           </div>
 
-          <!-- PDF 3 -->
+          <!-- PDF 3 
           <div class="check-item" onclick="toggleTask('task_pdf_3')">
             <div class="checkbox-custom" id="check_task_pdf_3">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2129,7 +2129,7 @@
             </div>
           </div>
 
-          <!-- PDF 4 -->
+          <!-- PDF 4 
           <div class="check-item" onclick="toggleTask('task_pdf_4')">
             <div class="checkbox-custom" id="check_task_pdf_4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2140,7 +2140,7 @@
             </div>
           </div>
 
-          <!-- PDF 5 -->
+          <!-- PDF 5  ->
           <div class="check-item" onclick="toggleTask('task_pdf_5')">
             <div class="checkbox-custom" id="check_task_pdf_5">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2151,7 +2151,7 @@
             </div>
           </div>
 
-          <!-- Interactive 6 -->
+          <!-- Interactive 6 ->
           <div class="check-item" onclick="toggleTask('task_int_6')">
             <div class="checkbox-custom" id="check_task_int_6">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2162,7 +2162,7 @@
             </div>
           </div>
 
-          <!-- PDF 6 -->
+          <!-- PDF 6 ->
           <div class="check-item" onclick="toggleTask('task_pdf_6')">
             <div class="checkbox-custom" id="check_task_pdf_6">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2174,11 +2174,12 @@
           </div>
 
         </div>
+        -->
 
         <!-- Notes area -->
+        <h3 class="notes-title">مفكرة الطالب وملاحظاته الخاصة:</h3>
         <div class="notes-section">
-          <h3 class="notes-title">مفكرة الطالب وملاحظاته الخاصة:</h3>
-          <textarea class="notes-textarea" id="userNotes" placeholder="اكتب القواعد النحوية الصعبة، أو الملاحظات التي تود مراجعتها لاحقًا هنا... (يتم الحفظ تلقائيًا)" oninput="saveNotes()"></textarea>
+          <textarea class="notes-textarea" id="userNotes" placeholder="اكتب الملاحظات الهامة التي تود مراجعتها لاحقًا هنا... (يتم الحفظ تلقائيًا)" oninput="saveNotes()"></textarea>
         </div>
       </div>
     </div>
