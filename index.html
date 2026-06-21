@@ -145,6 +145,7 @@
       color: var(--text-primary);
       font-weight: 800;
       font-size: 20px;
+      flex-shrink: 0;
     }
 
     .logo-icon {
@@ -159,6 +160,12 @@
       font-size: 24px;
       font-weight: 800;
       box-shadow: 0 4px 14px rgba(var(--primary-rgb), 0.4);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .theme-toggle {
@@ -179,6 +186,293 @@
       background: var(--primary);
       color: #fff;
       transform: rotate(30deg);
+    }
+
+    /* Subject Nav (Desktop) */
+    .subject-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .subject-nav-item {
+      position: relative;
+    }
+
+    .subject-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .subject-nav-btn:hover,
+    .subject-nav-item.open .subject-nav-btn {
+      background: var(--bg-tertiary);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .subject-nav-btn .chevron {
+      transition: transform 0.25s ease;
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .subject-nav-item.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    .subject-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 260px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      padding: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 200;
+    }
+
+    .subject-nav-item.open .subject-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .subject-dropdown-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 6px 12px 8px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 4px;
+    }
+
+    .subject-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .subject-dropdown a:hover {
+      background: rgba(var(--primary-rgb), 0.08);
+      color: var(--primary);
+    }
+
+    .subject-dropdown a .dd-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .subject-dropdown a.dd-watanya .dd-num {
+      background: #fce4ec;
+      color: #7a1f2b;
+    }
+
+    /* Hamburger Menu (Mobile) */
+    .hamburger-btn {
+      display: none;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .hamburger-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Mobile Drawer */
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 998;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-nav-overlay.active {
+      opacity: 1;
+    }
+
+    .mobile-nav-drawer {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      max-width: 85vw;
+      height: 100vh;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border-color);
+      z-index: 999;
+      overflow-y: auto;
+      transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 20px;
+    }
+
+    .mobile-nav-drawer.active {
+      right: 0;
+    }
+
+    .mobile-nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .mobile-nav-header h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .mobile-close-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .mobile-close-btn:hover {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .mobile-subject-group {
+      margin-bottom: 20px;
+    }
+
+    .mobile-subject-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mobile-subject-title .ms-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .mobile-subject-title.watanya .ms-icon {
+      background: #fce4ec;
+      color: #7a1f2b;
+    }
+
+    .mobile-nav-drawer a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 8px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .mobile-nav-drawer a:hover {
+      background: rgba(var(--primary-rgb), 0.08);
+      color: var(--primary);
+    }
+
+    .mobile-nav-drawer a .dd-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .mobile-nav-drawer a.dd-watanya .dd-num {
+      background: #fce4ec;
+      color: #7a1f2b;
+    }
+
+    /* Responsive: show hamburger, hide desktop nav */
+    @media (max-width: 768px) {
+      .subject-nav { display: none; }
+      .hamburger-btn { display: flex; }
+      .mobile-nav-overlay { display: block; pointer-events: none; }
+      .mobile-nav-overlay.active { pointer-events: auto; }
+      .logo span { font-size: 16px; }
     }
 
     /* Hero Section */
@@ -335,6 +629,22 @@
       border-radius: var(--radius-md);
       gap: 4px;
       width: fit-content;
+    }
+
+    @media (max-width: 600px) {
+      .tabs-wrapper {
+        width: 100%;
+        flex-direction: column;
+      }
+      .tab-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+      .search-box {
+        max-width: 100%;
+      }
     }
 
     .tab-btn {
@@ -905,29 +1215,86 @@
     /* Footer */
     footer {
       margin-top: auto;
-      background: rgba(var(--primary-rgb), 0.02);
+      background: var(--bg-secondary);
       border-top: 1px solid var(--border-color);
-      padding: 30px 0;
-      text-align: center;
-      font-size: 14px;
+      padding: 50px 0 25px 0;
       color: var(--text-secondary);
     }
 
-    .footer-links {
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+      text-align: right;
+    }
+
+    @media (max-width: 991px) {
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    .footer-col h4 {
+      color: var(--text-primary);
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      position: relative;
+      padding-bottom: 6px;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 25px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .footer-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 8px;
+      max-width: 280px;
+    }
+
+    .footer-links-vertical {
       display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 12px;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .footer-links a {
-      color: var(--primary);
+    .footer-links-vertical a {
+      color: var(--text-secondary);
       text-decoration: none;
-      font-weight: 700;
+      font-size: 13px;
+      font-weight: 600;
+      transition: var(--transition);
+      width: fit-content;
     }
 
-    .footer-links a:hover {
-      text-decoration: underline;
+    .footer-links-vertical a:hover {
+      color: var(--primary);
+      transform: translateX(-4px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+      text-align: center;
+      font-size: 12px;
     }
 
     /* Archive and Restore Buttons */
@@ -998,14 +1365,87 @@
         <div class="logo-icon">د</div>
         <span>منصة الدعاء</span>
       </a>
-      <button class="theme-toggle" id="themeToggleBtn" aria-label="تبديل المظهر">
-        <!-- Sun Icon (shown in dark theme) -->
-        <svg id="sunIcon" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-        <!-- Moon Icon (shown in light theme) -->
-        <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-      </button>
+
+      <!-- Desktop Subject Navigation -->
+      <nav>
+        <ul class="subject-nav" id="subjectNav">
+          <!-- اللغة العربية -->
+          <li class="subject-nav-item" data-dropdown="arabic">
+            <button class="subject-nav-btn" onclick="toggleDropdown('arabic')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+              اللغة العربية
+              <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="subject-dropdown">
+              <div class="subject-dropdown-title">نماذج اللغة العربية</div>
+              <a href="exam_arabic_1st.html"><span class="dd-num">1</span> النموذج الأول</a>
+              <a href="exam_arabic_2th.html"><span class="dd-num">2</span> النموذج الثاني</a>
+              <a href="exam_arabic_3rd.html"><span class="dd-num">3</span> النموذج الثالث</a>
+              <a href="exam_arabic_4th.html"><span class="dd-num">4</span> النموذج الرابع</a>
+              <a href="exam_arabic_5th.html"><span class="dd-num">5</span> النموذج الخامس</a>
+              <a href="exam_arabic_6th.html"><span class="dd-num">6</span> النموذج السادس</a>
+              <a href="exam_arabic_7th.html"><span class="dd-num">7</span> النموذج السابع</a>
+            </div>
+          </li>
+          <!-- التربية الوطنية -->
+          <li class="subject-nav-item" data-dropdown="watanya">
+            <button class="subject-nav-btn" onclick="toggleDropdown('watanya')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-6 9 6v13"/><path d="M13 21v-6h-2v6"/></svg>
+              التربية الوطنية
+              <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="subject-dropdown">
+              <div class="subject-dropdown-title">نماذج التربية الوطنية</div>
+              <a href="exam_tarbeya_watanya.html" class="dd-watanya"><span class="dd-num">★</span> المراجعة النهائية</a>
+            </div>
+          </li>
+          <!-- يمكن إضافة مواد أخرى هنا بنفس البنية -->
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <button class="theme-toggle" id="themeToggleBtn" aria-label="تبديل المظهر">
+          <svg id="sunIcon" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+      </div>
     </div>
   </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div class="mobile-nav-header">
+      <h3>المواد الدراسية</h3>
+      <button class="mobile-close-btn" id="mobileCloseBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="mobile-subject-group">
+      <div class="mobile-subject-title">
+        <span class="ms-icon">ع</span>
+        اللغة العربية (7 نماذج)
+      </div>
+      <a href="exam_arabic_1st.html"><span class="dd-num">1</span> النموذج الأول</a>
+      <a href="exam_arabic_2th.html"><span class="dd-num">2</span> النموذج الثاني</a>
+      <a href="exam_arabic_3rd.html"><span class="dd-num">3</span> النموذج الثالث</a>
+      <a href="exam_arabic_4th.html"><span class="dd-num">4</span> النموذج الرابع</a>
+      <a href="exam_arabic_5th.html"><span class="dd-num">5</span> النموذج الخامس</a>
+      <a href="exam_arabic_6th.html"><span class="dd-num">6</span> النموذج السادس</a>
+      <a href="exam_arabic_7th.html"><span class="dd-num">7</span> النموذج السابع</a>
+    </div>
+    <div class="mobile-subject-group">
+      <div class="mobile-subject-title watanya">
+        <span class="ms-icon">و</span>
+        التربية الوطنية
+      </div>
+      <a href="exam_tarbeya_watanya.html" class="dd-watanya"><span class="dd-num">★</span> المراجعة النهائية</a>
+    </div>
+    <!-- يمكن إضافة مواد أخرى هنا -->
+  </div>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -1720,19 +2160,50 @@
 
   <!-- Footer -->
   <footer>
-    <div class="container">
-      <p>منصة الدعاء © 2026 - جميع الحقوق محفوظة لطلاب الشهادة الثانوية العامة.</p>
-      <div class="footer-links">
-        <a href="exam_arabic_1st.html">النموذج الأول</a>
-        <a href="exam_arabic_2th.html">النموذج الثاني</a>
-        <a href="exam_arabic_3rd.html">النموذج الثالث</a>
-        <a href="exam_arabic_4th.html">النموذج الرابع</a>
-        <a href="exam_arabic_5th.html">النموذج الخامس</a>
-        <a href="exam_arabic_6th.html">النموذج السادس</a>
-        <a href="exam_arabic_7th.html">النموذج السابع</a>
-        <a href="exam_tarbeya_watanya.html">التربية الوطنية</a>
-        <a href="#interactiveTab" onclick="switchTab('interactive')">الرئيسية</a>
+    <div class="container footer-grid">
+      <!-- About / Branding column -->
+      <div class="footer-col branding-col">
+        <a href="index.html" class="logo" style="margin-bottom: 10px; display: inline-flex;">
+          <div class="logo-icon">د</div>
+          <span style="font-weight: 800; color: var(--text-primary);">منصة الدعاء</span>
+        </a>
+        <p class="footer-desc">بوابتك التفاعلية المتميزة للاستعداد والتميز في امتحانات الشهادة الثانوية العامة 2026.</p>
       </div>
+
+      <!-- Arabic column -->
+      <div class="footer-col">
+        <h4>اللغة العربية</h4>
+        <div class="footer-links-vertical">
+          <a href="exam_arabic_1st.html">النموذج الأول</a>
+          <a href="exam_arabic_2th.html">النموذج الثاني</a>
+          <a href="exam_arabic_3rd.html">النموذج الثالث</a>
+          <a href="exam_arabic_4th.html">النموذج الرابع</a>
+          <a href="exam_arabic_5th.html">النموذج الخامس</a>
+          <a href="exam_arabic_6th.html">النموذج السادس</a>
+          <a href="exam_arabic_7th.html">النموذج السابع</a>
+        </div>
+      </div>
+
+      <!-- National Ed column -->
+      <div class="footer-col">
+        <h4>التربية الوطنية</h4>
+        <div class="footer-links-vertical">
+          <a href="exam_tarbeya_watanya.html">المراجعة النهائية</a>
+        </div>
+      </div>
+
+      <!-- Quick links column -->
+      <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <div class="footer-links-vertical">
+          <a href="#interactiveTab" onclick="switchTab('interactive')">الرئيسية</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="container footer-bottom">
+      <p>منصة الدعاء © 2026 - جميع الحقوق محفوظة لطلاب الشهادة الثانوية العامة.</p>
     </div>
   </footer>
 
@@ -2025,6 +2496,47 @@
     // Initialize tracker and archive
     window.addEventListener('DOMContentLoaded', initTracker);
     window.addEventListener('DOMContentLoaded', initArchive);
+
+    // ===================== Subject Nav Dropdowns =====================
+    function toggleDropdown(name) {
+      const items = document.querySelectorAll('.subject-nav-item');
+      items.forEach(item => {
+        if (item.dataset.dropdown === name) {
+          item.classList.toggle('open');
+        } else {
+          item.classList.remove('open');
+        }
+      });
+    }
+
+    // Close dropdowns on outside click
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.subject-nav-item')) {
+        document.querySelectorAll('.subject-nav-item').forEach(i => i.classList.remove('open'));
+      }
+    });
+
+    // ===================== Mobile Drawer =====================
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileOverlay = document.getElementById('mobileNavOverlay');
+    const mobileDrawer = document.getElementById('mobileNavDrawer');
+    const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+
+    function openMobileNav() {
+      mobileOverlay.classList.add('active');
+      mobileDrawer.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      mobileOverlay.classList.remove('active');
+      mobileDrawer.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMobileNav);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileNav);
+    if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileNav);
   </script>
 </body>
 </html>
