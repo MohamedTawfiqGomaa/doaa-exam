@@ -716,8 +716,8 @@
     <li onclick="choose(this,'q39','ج')">ج) نائب عن المفعول المطلق.</li>
     <li onclick="choose(this,'q39','د')">د) مفعول مطلق.</li>
   </ul>
-  <div class="explain" id="exp_q39">✅ الإجابة الصحيحة: (ج) نائب عن المفعول المطلق.
-📌 التوضيح: كلمة "أعظم" أُضيفت إلى المصدر فأصبحت "نائبًا عن المفعول المطلق"، و(مشاركة) يُعرب مضافًا إليه مجرورًا.</div>
+  <div class="explain" id="exp_q39">✅ الإجابة الصحيحة: (ب) مضاف إليه.
+📌 التوضيح: كلمة "أعظم" هي التي تُعرب نائبًا عن المفعول المطلق لأنها أُضيفت للمصدر، أما كلمة (مشاركة) فهي مضاف إليه مجرور.</div>
 </div>
 
 <!-- س40 -->
@@ -997,14 +997,10 @@ function restoreProgress() {
         const m = li.getAttribute('onclick').match(/'([أبجد])'\)/);
         if (!m) return;
         const liOpt = m[1];
-        if (liOpt === answerKey[qid]) {
-          li.classList.add('correct');
-        } else if (liOpt === opt && opt !== answerKey[qid]) {
-          li.classList.add('wrong');
+        if (liOpt === opt) {
+          li.classList.add('selected');
         }
       });
-      const exp = document.getElementById('exp_' + qid);
-      if (exp) exp.style.display = 'block';
     } else {
       const ta = qdiv.querySelector(".essay-box");
       if (ta) {
@@ -1022,7 +1018,7 @@ const answerKey = {
   q21:'أ', q22:'ب', q23:'د', q24:'أ', q25:'د', q26:'أ',
   q27:'ب', q28:'أ', q29:'ج', q30:'ج', q31:'أ', q32:'د',
   q33:'د', q34:'أ', q35:'ب', q36:'ج', q37:'ب', q38:'ج',
-  q39:'ج', q40:'أ', q41:'د', q42:'د', q43:'أ', q44:'ج',
+  q39:'ب', q40:'أ', q41:'د', q42:'د', q43:'أ', q44:'ج',
   q45:'ب', q46:'ج', q47:'ب', q48:'أ', q49:'د', q50:'ج',
   q51:'ج', q53:'ب', q54:'د'
 };
@@ -1030,23 +1026,18 @@ const answerKey = {
 const selectedAnswers = {};
 
 function choose(el, qid, opt) {
-  if (selectedAnswers[qid] !== undefined) return; // already answered
+  if (document.getElementById('scoreBox').style.display === 'block') return;
   selectedAnswers[qid] = opt;
   saveAnswer(qid, opt);
 
   const options = el.parentElement.querySelectorAll('li');
   options.forEach(li => {
-    const liOpt = li.getAttribute('onclick').match(/'([أبجد])'\)/)[1];
-    if (liOpt === answerKey[qid]) {
-      li.classList.add('correct');
-    } else if (liOpt === opt && opt !== answerKey[qid]) {
-      li.classList.add('wrong');
+    li.classList.remove('selected');
+    const m = li.getAttribute('onclick').match(/'([أبجد])'\)/);
+    if (m && m[1] === opt) {
+      li.classList.add('selected');
     }
   });
-
-  // show explanation
-  const exp = document.getElementById('exp_' + qid);
-  if (exp) exp.style.display = 'block';
 }
 
 function toggleModel(id) {
@@ -1059,9 +1050,26 @@ function calcScore() {
   let correct = 0, wrong = [], unanswered = [];
 
   mcqKeys.forEach(qid => {
-    if (selectedAnswers[qid] === undefined) {
+    const qdiv = document.getElementById(qid);
+    const options = qdiv.querySelectorAll('.options li');
+    const selectedOpt = selectedAnswers[qid];
+
+    options.forEach(li => {
+      li.classList.remove('correct', 'wrong');
+      const m = li.getAttribute('onclick').match(/'([أبجد])'\)/);
+      if (!m) return;
+      const liOpt = m[1];
+      
+      if (liOpt === answerKey[qid]) {
+        li.classList.add('correct');
+      } else if (liOpt === selectedOpt && selectedOpt !== answerKey[qid]) {
+        li.classList.add('wrong');
+      }
+    });
+
+    if (selectedOpt === undefined) {
       unanswered.push(qid);
-    } else if (selectedAnswers[qid] === answerKey[qid]) {
+    } else if (selectedOpt === answerKey[qid]) {
       correct++;
     } else {
       wrong.push(qid);
@@ -1093,6 +1101,8 @@ function calcScore() {
 
   // show all explanations
   document.querySelectorAll('.explain').forEach(e => e.style.display = 'block');
+  // show all model answers for essay questions
+  document.querySelectorAll('.model-answer').forEach(e => e.style.display = 'block');
 }
 
 function showAllAnswers() {
