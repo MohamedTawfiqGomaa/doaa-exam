@@ -1,0 +1,15 @@
+.Qimg {
+    width: 100%;
+    max-width: clamp(200px, 50vw, 600px); /* 200px أقل حاجة, 50% من عرض الشاشة, 600px أكبر حاجة */
+    height: auto;
+    object-fit: contain; /* عشان الصورة كلها تبان */
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px; /* اختياري */
+}
+
+@media (max-width: 600px) {
+    .Qimg {
+        max-width: 90%; /* تسيب مسافة يمين وشمال في الموبايل */
+    }
+}
